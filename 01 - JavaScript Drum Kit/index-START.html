@@ -47,6 +47,7 @@
     </div>
   </div>
 
+<!-- Assign data-key, which is a made up data attribute used to hook up the divs assigned to certain keyboard keys to the audio clips -->
   <audio data-key="65" src="sounds/clap.wav"></audio>
   <audio data-key="83" src="sounds/hihat.wav"></audio>
   <audio data-key="68" src="sounds/kick.wav"></audio>
@@ -58,9 +59,27 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
 <script>
+    function playSound(e) {
+      const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+      const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+      if (!audio) return; //stop function from running when incorrect key pressed
+      audio.currentTime = 0; //Rewind to start of the audio clip
+      audio.play();
+      key.classList.add('playing'); //Use VanillaJS to add .playing to element (additional use cases: classList.remove or classList.toggle)
+    }
 
+  //Set up function to run when transiton ends
+  function removeTransition(e) {
+    if(e.propertyName !== 'transform') return; //Skip it if it's not a transform
+    this.classList.remove('playing');
+  }
+
+  const keys = document.querySelectorAll('.key'); //Create NodeList containing ".keys"
+  keys.forEach(key => key.addEventListener('transitionend', removeTransition)); //Attach event listener to NodeList
+
+  // Listen for keydown event, then run function playSound()
+  window.addEventListener('keydown', playSound);
 </script>
-
 
 </body>
 </html>
