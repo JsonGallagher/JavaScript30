@@ -59,17 +59,17 @@
         const oldest = inventors.sort((a, b) => ((a.year-a.passed) > (b.year-b.passed)) ? 1 : -1);
         console.table(oldest);
 
-    // // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
-    // // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
-    //   const category = document.querySelector(".mw-category"); //Select container for links
-    //   const links = Array.from(category.querySelectorAll("a")); //Generate a NodeList of links within container -- Convert to array so you can use map method on it. Could also use ES6 spread to convert instead: [...category.querySelectorAll("a")]
-    //   const de =  links
-    //                 .map(link => link.textContent)
-    //                 //Loop over NodeList and return just the textContent
-    //                 .filter(streetName => streetName.includes('de'));
-    //                 //Only return items that include 'de'
-    //
-    //   console.table(links);
+    // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
+    // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
+      const category = document.querySelector(".mw-category"); //Select container for links
+      const links = Array.from(category.querySelectorAll("a")); //Generate a NodeList of links within container -- Convert to array so you can use map method on it. Could also use ES6 spread to convert instead: [...category.querySelectorAll("a")]
+      const de =  links
+                    .map(link => link.textContent)
+                    //Loop over NodeList and return just the textContent
+                    .filter(streetName => streetName.includes('de'));
+                    //Only return items that include 'de'
+
+      console.table(links);
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
@@ -94,6 +94,7 @@
         return obj;
     }, {});
     console.table(transportation);
+
   </script>
 </body>
 </html>
