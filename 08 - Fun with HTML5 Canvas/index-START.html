@@ -5,13 +5,86 @@
   <title>HTML5 Canvas</title>
 </head>
 <body>
+  <div class="container">
+    <button id='clear'>Clear Canvas</button>
+  </div>
 <canvas id="draw" width="800" height="800"></canvas>
+
 <script>
+  const canvas = document.querySelector('#draw');
+  const ctx = canvas.getContext('2d');
+
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  ctx.lineJoin = 'round';
+  ctx.lineCap =  'round';
+  ctx.lineWidth = 15;
+
+  let isDrawing = false;
+  let lastX = 0;
+  let lastY = 0;
+  let hue = 0;
+
+  function draw(e) {
+    if (!isDrawing) return; //Stops the function from running when not mousedown
+      ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+      ctx.beginPath(); //Start from
+      ctx.moveTo(lastX, lastY); //Go to
+      ctx.lineTo(e.offsetX, e.offsetY);
+      ctx.stroke();
+
+      //Update lastX and lastY location
+      [lastX, lastY] = [e.offsetX, e.offsetY];
+      hue += 5;
+  }
+
+  canvas.addEventListener('mousemove', draw);
+
+  //Set isDrawing to true only when mousedown event occurs, reset when mouseup or mouseout of frame
+  canvas.addEventListener('mousedown', (e) => {
+    isDrawing = true;
+    [lastX, lastY] = [e.offsetX, e.offsetY];
+  });
+  canvas.addEventListener('mouseup', () => isDrawing = false);
+  canvas.addEventListener('mouseout', () => isDrawing = false);
+
+  //Store #clear button in variable
+  const clearCanvas = document.querySelector('#clear');
+
+  //Clear canvas on click
+  clearCanvas.addEventListener('click', () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    });
+
 </script>
 
 <style>
   html, body {
     margin: 0;
+  }
+
+  /* FB button style */
+  button {
+    -moz-user-select: none;
+    background: #2A49A5;
+    border: 1px solid #082783;
+    box-shadow: 0 1px #4C6BC7 inset;
+    color: white;
+    padding: .75rem 1rem;
+    text-decoration: none;
+    text-shadow: 0 -1px 0 #082783;
+    font: 2rem Verdana, sans-serif;
+    border-radius: 5px;
+  }
+  /* Center button wrapper div (.container) */
+  .container {
+    text-align: center;
+    margin: 1em auto;
+  }
+
+  canvas {
+    border-top: 2px solid #2A49A5;
   }
 </style>
 
