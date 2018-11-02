@@ -49,6 +49,32 @@
       font-weight: 200;
       border-left: 1px solid #D1E2FF;
     }
+
+  /* FB button style */
+  button {
+    -moz-user-select: none;
+    background: #2A49A5;
+    border: 1px solid #082783;
+    box-shadow: 0 1px #4C6BC7 inset;
+    color: white;
+    padding: 5px 10px;
+    text-decoration: none;
+    text-shadow: 0 -1px 0 #082783;
+    font: 1.5rem Verdana, sans-serif;
+    border-radius: 5px;
+    margin: 15px auto;
+  }
+
+  /* Center button wrapper div (.container) */
+  .container {
+    text-align: right;
+    margin: 15px 15px;
+  }
+
+  canvas {
+    border-top: 2px solid #2A49A5;
+  }
+
   </style>
    <!--
    The following is a common layout you would see in an email client.
@@ -57,6 +83,10 @@
 
   -->
   <div class="inbox">
+    <div class="container">
+      <button id="clear">Clear</button>
+    </div>
+
     <div class="item">
       <input type="checkbox">
       <p>This is an inbox layout.</p>
@@ -75,7 +105,7 @@
     </div>
     <div class="item">
       <input type="checkbox">
-      <p>Everything inbetween should also be set to checked</p>
+      <p>Everything in between should also be set to checked</p>
     </div>
     <div class="item">
       <input type="checkbox">
@@ -97,6 +127,7 @@
 
   <script>
   const checkboxes = document.querySelectorAll('.inbox input[type="checkbox"]');
+
   let lastChecked;
 
   //Set an event listener to all of the checkboxes, if clicked, run function
@@ -120,6 +151,16 @@
     }
     lastChecked = this;
   }
+  //Clear button functionality
+  const clear = document.getElementById('clear');
+
+  //Event listener for clear on click
+  clear.addEventListener('click', handleClear);
+
+  //Return checkbox.checked to false
+  function handleClear(e) {
+  checkboxes.forEach(checkbox => checkbox.checked = false);
+}
 
   </script>
 </body>
