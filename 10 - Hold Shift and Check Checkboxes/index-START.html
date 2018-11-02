@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Hold Shift to Check Multiple Checkboxes</title>
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" media="all">
 </head>
 <body>
   <style>
@@ -65,10 +66,42 @@
     margin: 15px auto;
   }
 
+  button:active {
+    background-color: #4C6BC7;
+    transform: translateY(2px);
+  }
+
   /* Center button wrapper div (.container) */
   .container {
     text-align: right;
-    margin: 15px 15px;
+    margin: 15px 15px 0px 0px;
+  }
+
+  /* Clear Icon */
+  .fa-refresh {
+    color: white;
+  }
+
+  /* Icon Spin on Hover Animation*/
+  .hvr-icon-spin {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  }
+
+  .hvr-icon-spin .hvr-icon {
+    -webkit-transition-duration: 1s;
+    transition-duration: 1s;
+    -webkit-transition-property: transform;
+    transition-property: transform;
+    -webkit-transition-timing-function: ease-in-out;
+    transition-timing-function: ease-in-out;
+  }
+  .hvr-icon-spin:focus .hvr-icon, .hvr-icon-spin:active .hvr-icon {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
   }
 
   canvas {
@@ -84,7 +117,11 @@
   -->
   <div class="inbox">
     <div class="container">
-      <button id="clear">Clear</button>
+      <button id="clear" class="hvr-grow hvr-icon-spin">Clear
+        <a href="#" class="hvr-icon-spin">
+        <i class="fa fa-refresh hvr-icon" aria-hidden="true"></i>
+        </a>
+      </button>
     </div>
 
     <div class="item">
