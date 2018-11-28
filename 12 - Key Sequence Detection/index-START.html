@@ -6,7 +6,28 @@
   <script type="text/javascript" src="http://www.cornify.com/js/cornify.js"></script>
 </head>
 <body>
+  <div class="output"></div>
 <script>
+const pressed = [];
+const secretCode = 'ArrowUpArrowUpArrowDownArrowDownArrowLeftArrowRightArrowLeftArrowRightba';
+
+window.addEventListener('keyup', (e) => {
+  console.log(e.key);
+  //add pressed keys to an array
+  pressed.push(e.key);
+
+  //Trim off extra characters (those that are more than desired secretCode length)
+  //Splice();
+    //Index = Start at the end of the array
+    //How many to remove = the total length of the array of characters entered minus length of secretCode length
+  pressed.splice(-secretCode.length-1, pressed.length - secretCode.length);
+
+  //Check for desired code sequence - Success message on correct combo
+    if(pressed.join('').includes(secretCode)) {
+      document.querySelector(".output").innerHTML += "<h1>Nailed it!</h1>";
+    };
+});
+
 </script>
 </body>
 </html>
