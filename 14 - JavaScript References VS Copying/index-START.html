@@ -65,13 +65,34 @@
       age: 80
     };
 
-    // and think we make a copy:
+    // and think we make a copy - the original referenced array is updated:
+    // const captain = person;
+    // captain.number = 99;
 
     // how do we take a copy instead?
+    const cap2 = Object.assign({}, person, {number: 99});
+        //Object.assign() Takes a blank object, the object that you'd like to take properties/values from, and the third argument are whatever additional properties you'd like to add to the new object.
 
-    // We will hopefully soon see the object ...spread
+    // Object spread, which works the same way as you spread into an array.
+    const cap3 = {...person}
 
     // Things to note - this is only 1 level deep - both for Arrays and Objects. lodash has a cloneDeep method, but you should think twice before using it.
+    const wes = {
+      name: 'wes',
+      age: 100,
+      social: {
+        twitter: '@wesbos',
+        facebook: 'wesbos.developer'
+      }
+    };
+
+    const dev = Object.assign({}, wes);
+    //Creates a copy of the object, if dev.name is updated, only the name is updated on the dev ojbect, not the wes object
+
+    //HOWEVER, if you update the nested social object on the dev Object - dev.social.twitter = '@coolman' then wes.social.twitter will also be updated. When you use Object.assign() it only does one level deep. If you need deeper cloning, you'll need to use a cloneDeep function (find online). Very rarely do you need to clone an object that deep, so ask yourself "should I be doing this, is there a better way?" prior to using.
+
+    //Poor man's deep clone - NOT SUGGESTED - const dev2 = JSON.parse(JSON.stringify(wes));
+        //What this does - a object is passed into JSON.stringify which converts the object to a string. Which is then passed into JSON.parse() and is then converted back to a full new copy of the Object
 
   </script>
 
